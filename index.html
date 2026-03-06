@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Khaled Alzeer — AI Student & Developer. Portfolio showcasing Python, Machine Learning, and Full-Stack projects." />
+  <title>Khaled Alzeer — Portfolio</title>
+
+  <!-- ─────────────────────────────────────────
+       FAVICON — KA initials as inline SVG
+       Gradient: Blue → Cyan → Violet
+       No external file needed — fully inline
+  ───────────────────────────────────────── -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,
+      <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'>
+        <defs>
+          <linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'>
+            <stop offset='0%25' style='stop-color:%232563eb'/>
+            <stop offset='50%25' style='stop-color:%2306b6d4'/>
+            <stop offset='100%25' style='stop-color:%238b5cf6'/>
+          </linearGradient>
+        </defs>
+        <rect width='32' height='32' rx='8' fill='%23060810'/>
+        <text x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle'
+              font-family='serif' font-weight='900' font-size='14'
+              fill='url(%23g)'>KA</text>
+      </svg>"
+    />
+
+  <!-- ─────────────────────────────────────────
+       GOOGLE FONTS — loaded first for performance
+       Fonts used:
+       • JetBrains Mono → badges, code, name mark
+       • Inter           → body text
+       • Cinzel          → headings, section titles
+  ───────────────────────────────────────── -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Inter:wght@400;600;700&family=Cinzel:wght@400;700;900&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ─────────────────────────────────────────
+       CUSTOM CURSOR
+       Two elements controlled by JS:
+       • cursor-dot  → small dot, follows instantly
+       • cursor-ring → large ring, follows with lag
+  ───────────────────────────────────────── -->
+  <div class="cursor-dot"  id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- ─────────────────────────────────────────
+       AMBIENT BACKGROUND BLOBS
+       Four fixed blurred circles creating soft
+       colored ambient lighting behind all content.
+       Animated independently via CSS keyframes.
+  ───────────────────────────────────────── -->
+  <div class="amb-blob amb-1"></div> <!-- Blue  — top left -->
+  <div class="amb-blob amb-2"></div> <!-- Cyan  — bottom right -->
+  <div class="amb-blob amb-3"></div> <!-- Violet — center -->
+  <div class="amb-blob amb-4"></div> <!-- Blue  — top right -->
+
+
+  <!-- ═══════════════════════════════════════════
+       MOBILE SIDEBAR DRAWER
+       Slides in from the right on mobile.
+       Triggered by the hamburger button in the navbar.
+       Contains: brand, nav links, CTA button, socials.
+  ═══════════════════════════════════════════ -->
+
+  <!-- Dark overlay backdrop — click to close drawer -->
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+
+  <!-- Sidebar panel -->
+  <aside class="drawer" id="drawer">
+
+    <!-- Drawer header: brand name + close ✕ button -->
+    <div class="drawer-header">
+      <div class="drawer-brand">
+        <span class="nav-name">Khaled Alzeer</span>
+        <span class="nav-sub">// AI Student &amp; Developer</span>
+      </div>
+      <button class="drawer-close" id="drawerClose" aria-label="Close menu">✕</button>
+    </div>
+
+    <!-- Drawer navigation links — vertical list -->
+    <nav class="drawer-nav">
+      <a href="#about"        class="drawer-link">About</a>
+      <a href="#skills"       class="drawer-link">Skills</a>
+      <a href="#projects"     class="drawer-link">Projects</a>
+      <a href="#certificates" class="drawer-link">Certificates</a>
+      <a href="#contact"      class="drawer-link">Contact</a>
+    </nav>
+
+    <!-- Full-width CTA button at bottom of links -->
+    <a href="#contact" class="btn-main drawer-cta">Hire Me →</a>
+
+    <!-- Social icon buttons row at the very bottom -->
+    <div class="drawer-socials">
+
+      <!-- GitHub -->
+      <a href="https://github.com/khaledAlzeer"
+         target="_blank" rel="noopener noreferrer"
+         class="icon-btn" title="GitHub">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+        </svg>
+      </a>
+
+      <!-- LinkedIn -->
+      <a href="https://linkedin.com/in/khaled-alzeer-60787b322"
+         target="_blank" rel="noopener noreferrer"
+         class="icon-btn" title="LinkedIn">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+        </svg>
+      </a>
+
+      <!-- Codeforces -->
+      <a href="https://codeforces.com/profile/Khaled_Alzeer05"
+         target="_blank" rel="noopener noreferrer"
+         class="icon-btn" title="Codeforces">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M4.5 7.5A1.5 1.5 0 013 6V3a1.5 1.5 0 011.5-1.5h3A1.5 1.5 0 019 3v3A1.5 1.5 0 017.5 7.5h-3zm6 9A1.5 1.5 0 019 15V3a1.5 1.5 0 011.5-1.5h3A1.5 1.5 0 0115 3v12a1.5 1.5 0 01-1.5 1.5h-3zm6 3A1.5 1.5 0 0115 18V9a1.5 1.5 0 011.5-1.5h3A1.5 1.5 0 0121 9v9a1.5 1.5 0 01-1.5 1.5h-3z"/>
+        </svg>
+      </a>
+
+      <!-- Email -->
+      <a href="mailto:kalzyr61@gmail.com" class="icon-btn" title="Email">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+        </svg>
+      </a>
+
+    </div>
+  </aside>
+
+
+  <!-- ═══════════════════════════════════════════
+       NAVIGATION BAR
+       Fixed floating pill at top center.
+       Desktop: Avatar+Name | Links | Hire Me CTA
+       Mobile:  Avatar+Name | Hamburger button
+  ═══════════════════════════════════════════ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+
+      <!-- Left: Avatar + Name + Subtitle -->
+      <a href="#hero" class="nav-brand">
+        <div class="nav-avatar">
+          <!-- 📸 Replace src with your actual photo path -->
+          <img
+            src="assets/img/profile.png"
+            alt="Khaled Alzeer"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+          />
+          <!-- Fallback: shown by JS if image fails to load -->
+          <span class="nav-avatar-fallback">KA</span>
+        </div>
+        <div class="nav-name-wrap">
+          <span class="nav-name">Khaled Alzeer</span>
+          <span class="nav-sub">// AI Student &amp; Developer</span>
+        </div>
+      </a>
+
+      <!-- Center: Nav links — hidden on mobile via CSS -->
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#certificates">Certificates</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <!-- Right: Desktop CTA + Mobile Hamburger -->
+      <div class="nav-right">
+        <!-- Desktop only — hidden on mobile via CSS -->
+        <a href="#contact" class="btn-nav nav-cta-desktop">Hire Me →</a>
+
+        <!-- Mobile only — hidden on desktop via CSS -->
+        <!-- JS toggles .open class → lines animate to ✕ -->
+        <button class="hamburger" id="hamburger" aria-label="Open menu">
+          <span></span> <!-- Line 1 — rotates to / -->
+          <span></span> <!-- Line 2 — fades out -->
+          <span></span> <!-- Line 3 — rotates to \ -->
+        </button>
+      </div>
+
+    </div>
+  </nav>
+
+
+  <!-- ═══════════════════════════════════════════
+       HERO SECTION
+       Full-viewport section (100vh).
+       Layout: two columns — text left, terminal right.
+       Contains: typewriter role, CTA buttons, socials.
+  ═══════════════════════════════════════════ -->
+  <section class="hero" id="hero">
+
+    <!-- Subtle grid pattern overlay (pointer-events: none) -->
+    <div class="hero-grid"></div>
+
+    <div class="hero-inner">
+
+      <!-- ── Left Column: Text Content ── -->
+      <div class="hero-text">
+
+        <!-- Section chip label -->
+        <div class="chip chip-cyan reveal">// AI Student &amp; Developer</div>
+
+        <!-- Main name heading — animated gradient -->
+        <h1 class="hero-name reveal reveal-d1">Khaled Alzeer</h1>
+
+        <!-- Typewriter role line: "> Python Developer|" -->
+        <!-- roleText span is updated by typeWriter() in script.js -->
+        <div class="hero-role reveal reveal-d2">
+          <span class="role-prefix">&gt; </span>
+          <span class="role-text" id="roleText"></span>
+          <span class="cursor-blink">|</span>
+        </div>
+
+        <!-- Short bio description -->
+        <p class="hero-desc reveal reveal-d2">
+          3rd-year AI &amp; Data student at ZUJ. Passionate about building
+          real-world applications with Python, Machine Learning, and modern
+          web technologies.
+        </p>
+
+        <!-- CTA Buttons: View Projects + Download CV -->
+        <div class="hero-btns reveal reveal-d3">
+          <a href="#projects" class="btn-main">View Projects →</a>
+          <!-- 📸 Replace # with your actual CV path: assets/KhaledAlzeerCV.pdf -->
+          <a href="assets/KhaledAlzeerCV.pdf" class="btn-ghost" download>Download CV</a>
+        </div>
+
+        <!-- Social icon buttons row -->
+        <div class="hero-socials reveal reveal-d3">
+
+          <!-- GitHub -->
+          <a href="https://github.com/khaledAlzeer"
+             target="_blank" rel="noopener noreferrer"
+             class="icon-btn" title="GitHub">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+            </svg>
+          </a>
+
+          <!-- LinkedIn -->
+          <a href="https://linkedin.com/in/khaled-alzeer-60787b322"
+             target="_blank" rel="noopener noreferrer"
+             class="icon-btn" title="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </a>
+
+          <!-- Codeforces -->
+          <a href="https://codeforces.com/profile/Khaled_Alzeer05"
+             target="_blank" rel="noopener noreferrer"
+             class="icon-btn" title="Codeforces">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M4.5 7.5A1.5 1.5 0 013 6V3a1.5 1.5 0 011.5-1.5h3A1.5 1.5 0 019 3v3A1.5 1.5 0 017.5 7.5h-3zm6 9A1.5 1.5 0 019 15V3a1.5 1.5 0 011.5-1.5h3A1.5 1.5 0 0115 3v12a1.5 1.5 0 01-1.5 1.5h-3zm6 3A1.5 1.5 0 0115 18V9a1.5 1.5 0 011.5-1.5h3A1.5 1.5 0 0121 9v9a1.5 1.5 0 01-1.5 1.5h-3z"/>
+            </svg>
+          </a>
+
+          <!-- Email -->
+          <a href="mailto:kalzyr61@gmail.com" class="icon-btn" title="Email">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+            </svg>
+          </a>
+
+        </div>
+      </div><!-- /hero-text -->
+
+      <!-- ── Right Column: Code Terminal ── -->
+      <div class="hero-terminal-wrap reveal reveal-d2">
+
+        <!-- Floating code snippet cards (hidden on mobile) -->
+        <!-- cf1, cf2, cf3 have different positions and animation delays -->
+        <div class="code-float cf1">
+          <span class="t-kw">import</span> <span class="t-fn">sklearn</span>
+        </div>
+        <div class="code-float cf2">
+          <span class="t-str">"accuracy"</span>: <span class="t-num">0.97</span>
+        </div>
+        <div class="code-float cf3">
+          <span class="t-kw">def</span> <span class="t-fn">predict</span>()
+        </div>
+
+        <!-- Terminal window -->
+        <div class="terminal">
+
+          <!-- macOS-style title bar with traffic light dots -->
+          <div class="term-bar">
+            <span class="dot dot-r"></span> <!-- Red    → close -->
+            <span class="dot dot-y"></span> <!-- Yellow → minimize -->
+            <span class="dot dot-g"></span> <!-- Green  → maximize -->
+            <span class="term-title">khaled@portfolio:~$</span>
+          </div>
+
+          <!-- Terminal code content with syntax highlighting -->
+          <div class="term-body">
+            <div class="term-line"><span class="t-comment"># Khaled Alzeer — AI Developer</span></div>
+            <div class="term-line"><span class="t-kw">import</span> <span class="t-fn">numpy</span> <span class="t-kw">as</span> np</div>
+            <div class="term-line"><span class="t-kw">import</span> <span class="t-fn">pandas</span> <span class="t-kw">as</span> pd</div>
+            <div class="term-line"><span class="t-kw">from</span> <span class="t-fn">sklearn</span> <span class="t-kw">import</span> <span class="t-cl">Pipeline</span></div>
+            <div class="term-line">&nbsp;</div>
+            <div class="term-line"><span class="t-kw">class</span> <span class="t-cl">Developer</span>:</div>
+            <div class="term-line">&nbsp;&nbsp;<span class="t-kw">def</span> <span class="t-fn">__init__</span>(self):</div>
+            <div class="term-line">&nbsp;&nbsp;&nbsp;&nbsp;self.name = <span class="t-str">"Khaled Alzeer"</span></div>
+            <div class="term-line">&nbsp;&nbsp;&nbsp;&nbsp;self.role = <span class="t-str">"AI Student"</span></div>
+            <div class="term-line">&nbsp;&nbsp;&nbsp;&nbsp;self.skills = [<span class="t-str">"Python"</span>, <span class="t-str">"ML"</span>, <span class="t-str">"React"</span>]</div>
+            <div class="term-line">&nbsp;&nbsp;&nbsp;&nbsp;self.year = <span class="t-num">3</span></div>
+            <div class="term-line">&nbsp;</div>
+            <div class="term-line">&nbsp;&nbsp;<span class="t-kw">def</span> <span class="t-fn">build</span>(self, idea):</div>
+            <div class="term-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-kw">return</span> <span class="t-cl">Pipeline</span>([idea, <span class="t-str">"clean_code"</span>])</div>
+            <div class="term-line">&nbsp;</div>
+            <div class="term-line"><span class="t-comment"># Output: production-ready apps</span></div>
+            <div class="term-line">khaled = <span class="t-cl">Developer</span>()</div>
+            <!-- Blinking block cursor at end of last line -->
+            <div class="term-line"><span class="t-fn">print</span>(khaled.build(<span class="t-str">"dream"</span>))<span class="cursor-blink2">█</span></div>
+          </div>
+
+        </div><!-- /terminal -->
+      </div><!-- /hero-terminal-wrap -->
+
+    </div><!-- /hero-inner -->
+  </section><!-- /hero -->
+
+
+  <!-- ═══════════════════════════════════════════
+       MARQUEE — Infinite Skills Ticker
+       Content is duplicated to create seamless loop.
+       Direction always LTR regardless of page dir.
+       Edges fade via CSS mask-image gradient.
+  ═══════════════════════════════════════════ -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <div class="marquee-inner">
+        <!-- First copy -->
+        <span>Python</span><span class="sep">◆</span>
+        <span>Machine Learning</span><span class="sep">◆</span>
+        <span>Data Analysis</span><span class="sep">◆</span>
+        <span>Power BI</span><span class="sep">◆</span>
+        <span>React</span><span class="sep">◆</span>
+        <span>Node.js</span><span class="sep">◆</span>
+        <span>Flask</span><span class="sep">◆</span>
+        <span>Django</span><span class="sep">◆</span>
+        <span>SQL</span><span class="sep">◆</span>
+        <span>Scikit-Learn</span><span class="sep">◆</span>
+        <span>Pandas</span><span class="sep">◆</span>
+        <span>NumPy</span><span class="sep">◆</span>
+        <span>Web Scraping</span><span class="sep">◆</span>
+        <span>REST APIs</span><span class="sep">◆</span>
+        <span>Git</span><span class="sep">◆</span>
+        <span>GitHub</span><span class="sep">◆</span>
+        <span>Data Visualization</span><span class="sep">◆</span>
+        <span>Deep Learning</span><span class="sep">◆</span>
+        <span>NLP</span><span class="sep">◆</span>
+        <span>PostgreSQL</span><span class="sep">◆</span>
+        <!-- Duplicate copy — required for seamless infinite scroll -->
+        <span>Python</span><span class="sep">◆</span>
+        <span>Machine Learning</span><span class="sep">◆</span>
+        <span>Data Analysis</span><span class="sep">◆</span>
+        <span>Power BI</span><span class="sep">◆</span>
+        <span>React</span><span class="sep">◆</span>
+        <span>Node.js</span><span class="sep">◆</span>
+        <span>Flask</span><span class="sep">◆</span>
+        <span>Django</span><span class="sep">◆</span>
+        <span>SQL</span><span class="sep">◆</span>
+        <span>Scikit-Learn</span><span class="sep">◆</span>
+        <span>Pandas</span><span class="sep">◆</span>
+        <span>NumPy</span><span class="sep">◆</span>
+        <span>Web Scraping</span><span class="sep">◆</span>
+        <span>REST APIs</span><span class="sep">◆</span>
+        <span>Git</span><span class="sep">◆</span>
+        <span>GitHub</span><span class="sep">◆</span>
+        <span>Data Visualization</span><span class="sep">◆</span>
+        <span>Deep Learning</span><span class="sep">◆</span>
+        <span>NLP</span><span class="sep">◆</span>
+        <span>PostgreSQL</span><span class="sep">◆</span>
+      </div>
+    </div>
+  </div><!-- /marquee-wrap -->
+
+
+  <!-- ═══════════════════════════════════════════
+       ABOUT SECTION
+       Two-column grid:
+       Left  → glass card: avatar + stats
+       Right → bio text + detail rows
+  ═══════════════════════════════════════════ -->
+  <section class="section about-section" id="about">
+    <div class="section-inner">
+
+      <!-- Section header: chip + title -->
+      <div class="section-header reveal">
+        <div class="chip chip-cyan">// about.me</div>
+        <h2 class="section-title">About Me</h2>
+      </div>
+
+      <div class="about-grid">
+
+        <!-- Left: Profile card with avatar + badges + stats -->
+        <div class="about-card glass-card reveal">
+
+          <!-- Circular avatar with gradient border -->
+          <div class="about-avatar-wrap">
+            <!-- 📸 Replace src with your actual photo path -->
+            <img
+              class="about-avatar"
+              src="assets/img/profile.png"
+              alt="Khaled Alzeer"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+            />
+            <!-- Shown by JS if image fails to load -->
+            <span class="about-avatar-fallback">KA</span>
+          </div>
+
+          <div class="about-name">Khaled Alzeer</div>
+          <div class="about-sub">// AI Student &amp; Developer</div>
+
+          <!-- University and year badges -->
+          <div class="about-badges">
+            <div class="about-badge">🎓 Al-Zaytoonah University of Jordan</div>
+            <div class="about-badge">📚 3rd Year — AI &amp; Data Science</div>
+          </div>
+
+          <!-- 2×2 stats grid -->
+          <div class="stats-grid">
+            <div class="stat-item">
+              <div class="stat-num">45+</div>
+              <div class="stat-label">GitHub Repos</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num">4+</div>
+              <div class="stat-label">Courses Completed</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num">35+</div>
+              <div class="stat-label">Technologies</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num">30+</div>
+              <div class="stat-label">Projects Built</div>
+            </div>
+          </div>
+
+        </div><!-- /about-card -->
+
+        <!-- Right: Bio text + detail rows -->
+        <div class="about-text reveal reveal-d1">
+
+          <h3 class="about-heading">Building. Learning. Solving.</h3>
+
+          <p class="about-bio">
+            3rd-year AI &amp; Data student at ZUJ with hands-on experience in Python development
+            and full-stack web development. Skilled in problem solving, scripting, automation,
+            data analysis, and visualization. Passionate about building professional-grade web
+            applications and continuously expanding knowledge in AI, Data Science, and web technologies.
+          </p>
+
+          <!-- Detail rows: Location / University / Major / Status -->
+          <div class="about-details">
+            <div class="detail-row">
+              <span class="detail-label">Location</span>
+              <span class="detail-val">Jordan 🇯🇴</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">University</span>
+              <span class="detail-val">Al-Zaytoonah University (ZUJ)</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Major</span>
+              <span class="detail-val">Artificial Intelligence &amp; Data Science</span>
+            </div>
+            <!-- Status row with pulsing green dot -->
+            <div class="detail-row">
+              <span class="detail-label">Status</span>
+              <span class="detail-val status-open">
+                <span class="status-dot"></span> Open to opportunities
+              </span>
+            </div>
+          </div>
+
+        </div><!-- /about-text -->
+
+      </div><!-- /about-grid -->
+    </div><!-- /section-inner -->
+  </section><!-- /about -->
+
+
+  <!-- ═══════════════════════════════════════════
+       SKILLS SECTION
+       Three tabbed grids switched by JS.
+       Tabs: // languages | // frameworks | // tools
+       Active grid shown via .active class toggle.
+  ═══════════════════════════════════════════ -->
+  <section class="section skills-section alt-bg" id="skills">
+    <div class="section-inner">
+
+      <!-- Section header -->
+      <div class="section-header reveal">
+        <div class="chip chip-blue">// my.skills</div>
+        <h2 class="section-title">Technical Skills</h2>
+      </div>
+
+      <!-- Tab buttons — JS handles switching active tab -->
+      <div class="skill-tabs reveal">
+        <button class="tab-btn active" data-tab="languages">// languages</button>
+        <button class="tab-btn"        data-tab="frameworks">// frameworks</button>
+        <button class="tab-btn"        data-tab="tools">// tools</button>
+      </div>
+
+      <!-- Tab 1: Languages — active by default -->
+      <div class="skill-grid active" id="tab-languages">
+        <div class="skill-chip sc-blue">🔵 Python</div>
+        <div class="skill-chip sc-blue">🔵 JavaScript</div>
+        <div class="skill-chip sc-blue">🔵 Java</div>
+        <div class="skill-chip sc-blue">🔵 HTML5</div>
+        <div class="skill-chip sc-blue">🔵 CSS3</div>
+        <div class="skill-chip sc-blue">🔵 SQL</div>
+        <div class="skill-chip sc-blue">🔵 R</div>
+        <div class="skill-chip sc-blue">🔵 PostgreSQL</div>
+      </div>
+
+      <!-- Tab 2: Frameworks & Libraries -->
+      <div class="skill-grid" id="tab-frameworks">
+        <div class="skill-chip sc-cyan">🩵 React</div>
+        <div class="skill-chip sc-cyan">🩵 Node.js</div>
+        <div class="skill-chip sc-cyan">🩵 Flask</div>
+        <div class="skill-chip sc-cyan">🩵 Django</div>
+        <div class="skill-chip sc-cyan">🩵 Express.js</div>
+        <div class="skill-chip sc-cyan">🩵 Bootstrap</div>
+        <div class="skill-chip sc-cyan">🩵 Pandas</div>
+        <div class="skill-chip sc-cyan">🩵 NumPy</div>
+        <div class="skill-chip sc-cyan">🩵 Scikit-Learn</div>
+        <div class="skill-chip sc-cyan">🩵 Matplotlib</div>
+        <div class="skill-chip sc-cyan">🩵 Plotly</div>
+        <div class="skill-chip sc-cyan">🩵 Seaborn</div>
+        <div class="skill-chip sc-cyan">🩵 Selenium</div>
+        <div class="skill-chip sc-cyan">🩵 Beautiful Soup</div>
+      </div>
+
+      <!-- Tab 3: Tools & Platforms -->
+      <div class="skill-grid" id="tab-tools">
+        <div class="skill-chip sc-violet">🟣 Git</div>
+        <div class="skill-chip sc-violet">🟣 GitHub</div>
+        <div class="skill-chip sc-violet">🟣 Power BI</div>
+        <div class="skill-chip sc-violet">🟣 Jupyter</div>
+        <div class="skill-chip sc-violet">🟣 VS Code</div>
+        <div class="skill-chip sc-violet">🟣 Google Colab</div>
+        <div class="skill-chip sc-violet">🟣 Postman</div>
+        <div class="skill-chip sc-violet">🟣 PyCharm</div>
+        <div class="skill-chip sc-violet">🟣 Excel</div>
+        <div class="skill-chip sc-violet">🟣 Tkinter</div>
+      </div>
+
+    </div><!-- /section-inner -->
+  </section><!-- /skills -->
+
+
+  <!-- ═══════════════════════════════════════════
+       PROJECTS SECTION
+       3-column grid of 8 project cards.
+       Each card has data-color="blue|cyan|violet"
+       which controls the hover glow color (JS + CSS).
+  ═══════════════════════════════════════════ -->
+  <section class="section projects-section" id="projects">
+    <div class="section-inner">
+
+      <!-- Section header -->
+      <div class="section-header reveal">
+        <div class="chip chip-violet">// my.projects</div>
+        <h2 class="section-title">Featured Projects</h2>
+      </div>
+
+      <div class="projects-grid">
+
+        <!-- ── Project 1: ML Classification ── -->
+        <div class="proj-card glass-card reveal" data-color="blue">
+          <div class="proj-header">
+            <div class="proj-status status-complete">✅ Complete</div>
+            <a href="https://github.com/khaledAlzeer/machine-learning-classification-model-selection"
+               target="_blank" rel="noopener noreferrer"
+               class="proj-gh-link" title="View on GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            </a>
+          </div>
+          <h3 class="proj-title">ML Classification Model Selection</h3>
+          <p class="proj-desc">Mastering 7 classification algorithms on Breast Cancer Wisconsin Dataset with performance comparison and confusion matrices.</p>
+          <div class="proj-tags">
+            <span class="tag tag-blue">Python</span>
+            <span class="tag tag-cyan">Scikit-Learn</span>
+            <span class="tag tag-cyan">Pandas</span>
+            <span class="tag tag-cyan">Matplotlib</span>
+          </div>
+        </div>
+
+        <!-- ── Project 2: ML Regression ── -->
+        <div class="proj-card glass-card reveal reveal-d1" data-color="cyan">
+          <div class="proj-header">
+            <div class="proj-status status-complete">✅ Complete</div>
+            <a href="https://github.com/khaledAlzeer/machine-learning-regression-model-selection-power-plant"
+               target="_blank" rel="noopener noreferrer"
+               class="proj-gh-link" title="View on GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            </a>
+          </div>
+          <h3 class="proj-title">ML Regression Model Selection</h3>
+          <p class="proj-desc">Comparative analysis of 5 regression models on real-world power plant dataset with comprehensive performance metrics.</p>
+          <div class="proj-tags">
+            <span class="tag tag-blue">Python</span>
+            <span class="tag tag-cyan">Scikit-Learn</span>
+            <span class="tag tag-cyan">NumPy</span>
+            <span class="tag tag-violet">Plotly</span>
+          </div>
+        </div>
+
+        <!-- ── Project 3: Logistic Regression ── -->
+        <div class="proj-card glass-card reveal reveal-d2" data-color="violet">
+          <div class="proj-header">
+            <div class="proj-status status-complete">✅ Complete</div>
+            <a href="https://github.com/khaledAlzeer/logistic-regression-breast-cancer"
+               target="_blank" rel="noopener noreferrer"
+               class="proj-gh-link" title="View on GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            </a>
+          </div>
+          <h3 class="proj-title">Breast Cancer — Logistic Regression</h3>
+          <p class="proj-desc">Complete classification project with k-Fold cross-validation and detailed evaluation metrics for medical data analysis.</p>
+          <div class="proj-tags">
+            <span class="tag tag-blue">Python</span>
+            <span class="tag tag-cyan">Scikit-Learn</span>
+            <span class="tag tag-violet">Seaborn</span>
+          </div>
+        </div>
+
+        <!-- ── Project 4: BookTracker ── -->
+        <div class="proj-card glass-card reveal" data-color="blue">
+          <div class="proj-header">
+            <div class="proj-status status-complete">✅ Complete</div>
+            <a href="https://github.com/khaledAlzeer/BookTracker"
+               target="_blank" rel="noopener noreferrer"
+               class="proj-gh-link" title="View on GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            </a>
+          </div>
+          <h3 class="proj-title">BookTracker</h3>
+          <p class="proj-desc">Full-stack Node.js app for tracking books with automatic cover fetching via Open Library API and PostgreSQL storage.</p>
+          <div class="proj-tags">
+            <span class="tag tag-blue">Node.js</span>
+            <span class="tag tag-violet">PostgreSQL</span>
+            <span class="tag tag-cyan">Express</span>
+            <span class="tag tag-muted">EJS</span>
+          </div>
+        </div>
+
+        <!-- ── Project 5: SHK Devs Website ── -->
+        <div class="proj-card glass-card reveal reveal-d1" data-color="cyan">
+          <div class="proj-header">
+            <div class="proj-status status-complete">✅ Complete</div>
+            <a href="https://github.com/khaledAlzeer/SHK-Devs-Smart-Digital-Solutions-Design-v2-"
+               target="_blank" rel="noopener noreferrer"
+               class="proj-gh-link" title="View on GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            </a>
+          </div>
+          <h3 class="proj-title">SHK Devs Website v2</h3>
+          <p class="proj-desc">Redesigned agency website with animated orbital hero, Font Awesome icons, and immersive full-screen sections.</p>
+          <div class="proj-tags">
+            <span class="tag tag-blue">HTML</span>
+            <span class="tag tag-cyan">CSS</span>
+            <span class="tag tag-muted">JavaScript</span>
+          </div>
+        </div>
+
+        <!-- ── Project 6: Blog API ── -->
+        <div class="proj-card glass-card reveal reveal-d2" data-color="violet">
+          <div class="proj-header">
+            <div class="proj-status status-complete">✅ Complete</div>
+            <a href="https://github.com/khaledAlzeer/nodejs-complete-blog-api"
+               target="_blank" rel="noopener noreferrer"
+               class="proj-gh-link" title="View on GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            </a>
+          </div>
+          <h3 class="proj-title">Node.js Blog API</h3>
+          <p class="proj-desc">Complete Notes/Blog API with Express.js, Axios, EJS — separate API server and frontend server architecture.</p>
+          <div class="proj-tags">
+            <span class="tag tag-blue">Node.js</span>
+            <span class="tag tag-cyan">Express</span>
+            <span class="tag tag-cyan">Axios</span>
+            <span class="tag tag-muted">EJS</span>
+          </div>
+        </div>
+
+        <!-- ── Project 7: React Keeper Notes ── -->
+        <div class="proj-card glass-card reveal" data-color="blue">
+          <div class="proj-header">
+            <div class="proj-status status-complete">✅ Complete</div>
+            <a href="https://github.com/khaledAlzeer/react-keeper-notes"
+               target="_blank" rel="noopener noreferrer"
+               class="proj-gh-link" title="View on GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            </a>
+          </div>
+          <h3 class="proj-title">React Keeper Notes</h3>
+          <p class="proj-desc">Modern React notes app using Material UI for dynamic note management with a clean, responsive interface.</p>
+          <div class="proj-tags">
+            <span class="tag tag-cyan">React</span>
+            <span class="tag tag-violet">Material UI</span>
+            <span class="tag tag-blue">JavaScript</span>
+          </div>
+        </div>
+
+        <!-- ── Project 8: Family Travel Tracker ── -->
+        <div class="proj-card glass-card reveal reveal-d1" data-color="cyan">
+          <div class="proj-header">
+            <div class="proj-status status-complete">✅ Complete</div>
+            <a href="https://github.com/khaledAlzeer/FamilyTravelTracker"
+               target="_blank" rel="noopener noreferrer"
+               class="proj-gh-link" title="View on GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            </a>
+          </div>
+          <h3 class="proj-title">Family Travel Tracker</h3>
+          <p class="proj-desc">Track and visualize countries visited by family members with an interactive map interface and per-user profiles.</p>
+          <div class="proj-tags">
+            <span class="tag tag-blue">Node.js</span>
+            <span class="tag tag-violet">PostgreSQL</span>
+            <span class="tag tag-muted">EJS</span>
+          </div>
+        </div>
+
+        <!-- ── Project 9: Khaled Blog ── -->
+        <div class="proj-card glass-card reveal reveal-d2" data-color="violet">
+          <div class="proj-header">
+            <div class="proj-status status-complete">✅ Complete</div>
+            <a href="https://github.com/khaledAlzeer/BlogWithUsers"
+               target="_blank" rel="noopener noreferrer"
+               class="proj-gh-link" title="View on GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            </a>
+          </div>
+          <h3 class="proj-title">Khaled Blog</h3>
+          <p class="proj-desc">Flask blogging platform with role-based access — admin can create, edit and delete posts, users can register and comment with Gravatar avatars.</p>
+          <div class="proj-tags">
+            <span class="tag tag-blue">Python</span>
+            <span class="tag tag-cyan">Flask</span>
+            <span class="tag tag-cyan">SQLAlchemy</span>
+            <span class="tag tag-violet">Flask-Login</span>
+            <span class="tag tag-muted">Bootstrap 5</span>
+          </div>
+        </div>
+
+      </div><!-- /projects-grid -->
+
+      <!-- "View All on GitHub →" button -->
+      <div class="proj-footer reveal">
+        <a href="https://github.com/khaledAlzeer"
+           target="_blank" rel="noopener noreferrer"
+           class="btn-ghost">View All on GitHub →</a>
+      </div>
+
+    </div><!-- /section-inner -->
+  </section><!-- /projects -->
+
+
+  <!-- ═══════════════════════════════════════════
+       CERTIFICATES SECTION
+       3-column grid of 4 certificate cards.
+       Each card: image top (16:9) + body below.
+       4th card (ML A-Z) uses progress placeholder
+       until the certificate is earned.
+  ═══════════════════════════════════════════ -->
+  <section class="section certs-section alt-bg" id="certificates">
+    <div class="section-inner">
+
+      <!-- Section header -->
+      <div class="section-header reveal">
+        <div class="chip chip-cyan">// my.certificates</div>
+        <h2 class="section-title">Udemy Certificates</h2>
+        <p class="section-sub">Verified learning from industry-leading instructors</p>
+      </div>
+
+      <div class="certs-grid">
+
+        <!-- ── Certificate 1: Python Bootcamp ── -->
+        <div class="cert-card glass-card reveal">
+          <div class="cert-img-wrap">
+            <!-- 📸 Replace with screenshot of your Udemy Python certificate -->
+            <img
+              src="assets/img/cert-python.png"
+              alt="100 Days of Code - Python Certificate"
+              loading="lazy"
+              onerror="this.parentElement.innerHTML='<div class=cert-img-fallback>🐍 Python</div>'"
+            />
+          </div>
+          <div class="cert-body">
+            <div class="cert-status status-complete">✅ Completed</div>
+            <h3 class="cert-title">100 Days of Code — Python Pro Bootcamp</h3>
+            <div class="cert-issuer">Udemy · Angela Yu</div>
+            <div class="cert-date">📅 2024</div>
+            <div class="cert-skills">
+              <span class="tag tag-blue">Python</span>
+              <span class="tag tag-cyan">Flask</span>
+              <span class="tag tag-cyan">Web Scraping</span>
+              <span class="tag tag-cyan">Pandas</span>
+              <span class="tag tag-cyan">NumPy</span>
+              <span class="tag tag-violet">Matplotlib</span>
+              <span class="tag tag-violet">Tkinter</span>
+              <span class="tag tag-muted">REST APIs</span>
+              <span class="tag tag-muted">SQL</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Certificate 2: Power BI ── -->
+        <div class="cert-card glass-card reveal reveal-d1">
+          <div class="cert-img-wrap">
+            <!-- 📸 Replace with screenshot of your Udemy Power BI certificate -->
+            <img
+              src="assets/img/cert-powerbi.png"
+              alt="Power BI Desktop Certificate"
+              loading="lazy"
+              onerror="this.parentElement.innerHTML='<div class=cert-img-fallback>📊 Power BI</div>'"
+            />
+          </div>
+          <div class="cert-body">
+            <div class="cert-status status-complete">✅ Completed</div>
+            <h3 class="cert-title">Microsoft Power BI Desktop — Maven Analytics</h3>
+            <div class="cert-issuer">Udemy · Maven Analytics</div>
+            <div class="cert-date">📅 2025</div>
+            <div class="cert-skills">
+              <span class="tag tag-blue">Power BI</span>
+              <span class="tag tag-cyan">DAX</span>
+              <span class="tag tag-cyan">Data Modeling</span>
+              <span class="tag tag-violet">ETL</span>
+              <span class="tag tag-violet">Dashboards</span>
+              <span class="tag tag-muted">Power Query</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Certificate 3: Web Dev Bootcamp ── -->
+        <div class="cert-card glass-card reveal reveal-d2">
+          <div class="cert-img-wrap">
+            <!-- 📸 Replace with screenshot of your Udemy Web Dev certificate -->
+            <img
+              src="assets/img/cert-webdev.png"
+              alt="Complete Web Development Certificate"
+              loading="lazy"
+              onerror="this.parentElement.innerHTML='<div class=cert-img-fallback>🌐 Web Dev</div>'"
+            />
+          </div>
+          <div class="cert-body">
+            <div class="cert-status status-complete">✅ Completed</div>
+            <h3 class="cert-title">Complete Web Development Bootcamp</h3>
+            <div class="cert-issuer">Udemy · Angela Yu</div>
+            <div class="cert-date">📅 2025-2026</div>
+            <div class="cert-skills">
+              <span class="tag tag-blue">HTML5</span>
+              <span class="tag tag-blue">CSS3</span>
+              <span class="tag tag-blue">JavaScript</span>
+              <span class="tag tag-cyan">React</span>
+              <span class="tag tag-cyan">Node.js</span>
+              <span class="tag tag-violet">PostgreSQL</span>
+              <span class="tag tag-muted">REST APIs</span>
+              <span class="tag tag-muted">Bootstrap</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Certificate 4: ML A-Z (In Progress) ── -->
+        <div class="cert-card glass-card reveal">
+          <div class="cert-img-wrap">
+
+            <!-- Progress placeholder — shown while cert is in progress -->
+            <!-- ✅ When completed: delete this block and uncomment the img below -->
+            <div class="cert-progress-placeholder">
+              <div class="cpp-icon">🤖</div>
+              <div class="cpp-label">In Progress</div>
+              <div class="cpp-bar-wrap">
+                <div class="cpp-bar" style="--prog: 65%"></div>
+              </div>
+              <div class="cpp-percent">65% Complete</div>
+            </div>
+
+            <!--
+            ✅ UNCOMMENT WHEN CERT IS COMPLETED:
+            <img
+              src="assets/img/cert-ml.jpg"
+              alt="Machine Learning A-Z Certificate"
+              loading="lazy"
+              onerror="this.parentElement.innerHTML='<div class=cert-img-fallback>🤖 ML A-Z</div>'"
+            />
+            -->
+
+          </div>
+          <div class="cert-body">
+
+            <!-- 🔄 In Progress badge — swap to status-complete when done -->
+            <div class="cert-status status-progress">🔄 In Progress</div>
+            <!-- ✅ UNCOMMENT WHEN COMPLETED: -->
+            <!-- <div class="cert-status status-complete">✅ Completed</div> -->
+
+            <h3 class="cert-title">Machine Learning A–Z</h3>
+            <div class="cert-issuer">Udemy · Kirill Eremenko &amp; Hadelin de Ponteves</div>
+
+            <!-- Update date when completed -->
+            <div class="cert-date">📅 Expected: 2026</div>
+
+            <div class="cert-skills">
+              <span class="tag tag-blue">Regression</span>
+              <span class="tag tag-blue">Classification</span>
+              <span class="tag tag-cyan">Clustering</span>
+              <span class="tag tag-cyan">NLP</span>
+              <span class="tag tag-violet">Deep Learning</span>
+              <span class="tag tag-violet">XGBoost</span>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /certs-grid -->
+    </div><!-- /section-inner -->
+  </section><!-- /certificates -->
+
+  <!-- ═══════════════════════════════════════════
+       CONTACT SECTION
+       Auto-fill grid of 5 contact method cards.
+       Each card is a full <a> link to the platform.
+       Left border color differs per platform:
+       • cc-blue   → Email, Codeforces
+       • cc-cyan   → LinkedIn
+       • cc-violet → GitHub
+       • cc-green  → WhatsApp
+  ═══════════════════════════════════════════ -->
+  <section class="section contact-section" id="contact">
+    <div class="section-inner">
+
+      <!-- Section header -->
+      <div class="section-header reveal">
+        <div class="chip chip-blue">// contact.me</div>
+        <h2 class="section-title">Get In Touch</h2>
+        <p class="section-sub">Open to collaborations, opportunities, and interesting conversations.</p>
+      </div>
+
+      <div class="contact-grid">
+
+        <!-- ── Email ── -->
+        <a href="mailto:kalzyr61@gmail.com"
+           class="contact-card glass-card reveal cc-blue">
+          <div class="cc-icon">✉️</div>
+          <div class="cc-content">
+            <div class="cc-label">Email</div>
+            <div class="cc-value">kalzyr61@gmail.com</div>
+          </div>
+          <div class="cc-arrow">→</div> <!-- Slides right on hover -->
+        </a>
+
+        <!-- ── LinkedIn ── -->
+        <a href="https://linkedin.com/in/khaled-alzeer-60787b322"
+           target="_blank" rel="noopener noreferrer"
+           class="contact-card glass-card reveal reveal-d1 cc-cyan">
+          <div class="cc-icon">💼</div>
+          <div class="cc-content">
+            <div class="cc-label">LinkedIn</div>
+            <div class="cc-value">Khaled Alzeer</div>
+          </div>
+          <div class="cc-arrow">→</div>
+        </a>
+
+        <!-- ── GitHub ── -->
+        <a href="https://github.com/khaledAlzeer"
+           target="_blank" rel="noopener noreferrer"
+           class="contact-card glass-card reveal reveal-d2 cc-violet">
+          <div class="cc-icon">🐙</div>
+          <div class="cc-content">
+            <div class="cc-label">GitHub</div>
+            <div class="cc-value">khaledAlzeer</div>
+          </div>
+          <div class="cc-arrow">→</div>
+        </a>
+
+        <!-- ── Codeforces ── -->
+        <a href="https://codeforces.com/profile/Khaled_Alzeer05"
+           target="_blank" rel="noopener noreferrer"
+           class="contact-card glass-card reveal cc-blue">
+          <div class="cc-icon">🏆</div>
+          <div class="cc-content">
+            <div class="cc-label">Codeforces</div>
+            <div class="cc-value">Khaled_Alzeer05</div>
+          </div>
+          <div class="cc-arrow">→</div>
+        </a>
+
+        <!-- ── WhatsApp ── -->
+        <a href="https://wa.me/962791139710"
+           target="_blank" rel="noopener noreferrer"
+           class="contact-card glass-card reveal reveal-d1 cc-green">
+          <div class="cc-icon">💬</div>
+          <div class="cc-content">
+            <div class="cc-label">WhatsApp</div>
+            <div class="cc-value">+962 791 139 710</div>
+          </div>
+          <div class="cc-arrow">→</div>
+        </a>
+
+      </div><!-- /contact-grid -->
+    </div><!-- /section-inner -->
+  </section><!-- /contact -->
+
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+       Three-column layout:
+       Left   → Brand name + subtitle
+       Center → Nav links (same as navbar)
+       Right  → Social icon buttons
+
+       Top animated gradient line via CSS ::before.
+       Copyright line below main row.
+  ═══════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="footer-inner">
+
+      <!-- Left: Brand -->
+      <div class="footer-brand">
+        <span class="footer-name">Khaled Alzeer</span>
+        <span class="footer-sub">// AI Student &amp; Developer</span>
+      </div>
+
+      <!-- Center: Nav links — same sections as navbar -->
+      <nav class="footer-links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#certificates">Certificates</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <!-- Right: Social icon buttons -->
+      <div class="footer-socials">
+
+        <!-- GitHub -->
+        <a href="https://github.com/khaledAlzeer"
+           target="_blank" rel="noopener noreferrer"
+           title="GitHub">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+          </svg>
+        </a>
+
+        <!-- LinkedIn -->
+        <a href="https://linkedin.com/in/khaled-alzeer-60787b322"
+           target="_blank" rel="noopener noreferrer"
+           title="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+        </a>
+
+        <!-- Codeforces -->
+        <a href="https://codeforces.com/profile/Khaled_Alzeer05"
+           target="_blank" rel="noopener noreferrer"
+           title="Codeforces">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M4.5 7.5A1.5 1.5 0 013 6V3a1.5 1.5 0 011.5-1.5h3A1.5 1.5 0 019 3v3A1.5 1.5 0 017.5 7.5h-3zm6 9A1.5 1.5 0 019 15V3a1.5 1.5 0 011.5-1.5h3A1.5 1.5 0 0115 3v12a1.5 1.5 0 01-1.5 1.5h-3zm6 3A1.5 1.5 0 0115 18V9a1.5 1.5 0 011.5-1.5h3A1.5 1.5 0 0121 9v9a1.5 1.5 0 01-1.5 1.5h-3z"/>
+          </svg>
+        </a>
+
+      </div><!-- /footer-socials -->
+    </div><!-- /footer-inner -->
+
+    <!-- Copyright line — below the main footer row -->
+    <div class="footer-copy">
+      © 2025 Khaled Alzeer · Built with ☕ &amp; 💙 · All rights reserved
+    </div>
+
+  </footer><!-- /footer -->
+
+
+  <!-- ─────────────────────────────────────────
+       MAIN JAVASCRIPT
+       Loaded at end of body for performance.
+       Handles: cursor, typewriter, scroll reveal,
+       skills tabs, active nav, drawer, glow, fallback.
+  ───────────────────────────────────────── -->
+  <script src="script.js"></script>
+
+</body>
+</html>
