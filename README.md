@@ -2,7 +2,7 @@
 
 A personal portfolio website for **Khaled Alzeer**, AI & Data Science student at Al-Zaytoonah University of Jordan (ZUJ). Built to showcase Machine Learning projects, technical skills, and certifications.
 
-🔗 **Live Site:** _add your deployed link here (GitHub Pages / Vercel / Netlify)_
+🔗 **Live Demo:** [khaledalzeer.github.io/portfolio](https://khaledalzeer.github.io/portfolio)
 
 ---
 
